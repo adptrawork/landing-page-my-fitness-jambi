@@ -75,8 +75,37 @@ a, button, summary, label { -webkit-tap-highlight-color: transparent; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rise { animation: none; opacity: 1; }
-  .ticker-track { animation: none; }
-  html { scroll-behavior: auto; }
-  * { transition-duration: 0.01ms !important; }
+   .rise { animation: none; opacity: 1; }
+   .ticker-track { animation: none; }
+   html { scroll-behavior: auto; }
+   * { transition-duration: 0.01ms !important; }
+}
+/* Stopwatch overlay on hero image */
+/* Stopwatch overlay on hero image */
+.relative.min-h-\\[52vh\\]\\.md\\:min-h-full {
+  position: relative;
+}
+.relative.min-h-\\[52vh\\]\\.md\\:min-h-full::before {
+  content: "⏱";
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 4rem;
+  height: 4rem;
+  background: var(--accent);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Barlow Condensed', 'Public Sans', ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transform: rotate(-20deg);
+  border-radius: 50%;
+  opacity: 0.9;
+  mix-blend-mode: screen;
+  pointer-events: none;
 }
