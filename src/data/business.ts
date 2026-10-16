@@ -3,56 +3,62 @@ export const business = {
   slug: 'my-fitness-jambi',
   category: 'Gym Area The Hok',
   city: 'Kota Jambi',
-  rating: 4.9,
-  reviewCount: 110,
-  phone: '6281234567890', // TODO-GANTI: nomor WA aktif pemilik
-  mapsUrl: 'https://maps.google.com/?q=My%20Fitness%20Jambi%20Jambi',
-  address: 'The Hok, Kota Jambi',
-  hours: 'Senin–Sabtu 09.00–21.00, Minggu 10.00–20.00',
-  title: 'My Fitness Jambi The Hok — Konsultasi Gratis',
-  description: 'My Fitness Jambi: jangkauan The Hok via SEO lokal, form konsultasi pemula via WhatsApp.',
+  // Catatan: tidak ditemukan IG resmi My Fitness Jambi (16 Okt 2026).
+  // Akun @myfitness_kebunkopi adalah bisnis berbeda — TIDAK dipakai.
+  // Nomor WA resmi belum terverifikasi — CTA utama: kunjungan langsung + Google Maps.
+  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=My+Fitness+The+Hok+Jambi',
+  mapsEmbed: 'https://maps.google.com/maps?q=My%20Fitness%20The%20Hok%20Jambi&t=&z=15&ie=UTF8&iwloc=&output=embed',
+  address: 'The Hok, Kota Jambi — titik pasti cek Google Maps',
+  hours: 'Jam operasional konfirmasi via kunjungan / Google Maps',
+  title: 'My Fitness Jambi The Hok — Gym Dekat Rumah',
+  description:
+    'My Fitness Jambi area The Hok: gym beban & kardio, kelas, personal training. Harga estimasi — konfirmasi langsung di lokasi.',
   canonicalPath: '/',
-  ogImage: '/og-default.jpg',
+  ogImage: '/images/my-fitness-1.jpg',
 };
 
-export const waLink = (message: string) =>
-  `https://wa.me/${business.phone}?text=${encodeURIComponent(message)}`;
+export const programs = [
+  {
+    name: 'Open Gym — Beban & Kardio',
+    badge: 'Estimasi',
+    desc: 'Area latihan beban dan kardio untuk member harian/bulanan. Fasilitas pasti cek lokasi.',
+    img: '/images/my-fitness-1.jpg',
+    alt: 'Area beban gym My Fitness The Hok Jambi',
+  },
+  {
+    name: 'Kelas Grup',
+    badge: 'Estimasi',
+    desc: 'Kelas kebugaran terjadwal. Jadwal pasti cek papan info / tanya di lokasi.',
+    img: '/images/my-fitness-2.jpg',
+    alt: 'Kelas grup kebugaran My Fitness Jambi',
+  },
+  {
+    name: 'Personal Training',
+    badge: 'Estimasi',
+    desc: 'Program 1-on-1 sesuai target. Ketersediaan trainer tanya di lokasi.',
+    img: '/images/my-fitness-3.jpg',
+    alt: 'Sesi personal training My Fitness Jambi',
+  },
+  {
+    name: 'Asesmen & Konsultasi Pemula',
+    badge: 'Estimasi',
+    desc: 'Pemula disarankan asesmen dulu sebelum program. Gratis/tidak tergantung lokasi.',
+    img: '/images/my-fitness-4.jpg',
+    alt: 'Asesmen awal member baru My Fitness Jambi',
+  },
+];
 
-export const products = [
-  {
-    "name": "Harian — Akses 1 Hari + 1 Kelas",
-    "price": "Rp 35.000",
-    "badge": "Fleksibel",
-    "stock": "Kuota"
-  },
-  {
-    "name": "Mingguan — 7 Hari Semua Kelas",
-    "price": "Rp 120.000",
-    "badge": "Populer",
-    "stock": "Kuota"
-  },
-  {
-    "name": "Bulanan — Full Akses + Program",
-    "price": "Rp 300.000",
-    "badge": "Hemat",
-    "stock": "Kuota"
-  },
-  {
-    "name": "Tahunan — Full + 2 Bulan Bonus",
-    "price": "Rp 2.900.000",
-    "badge": "Best Value",
-    "stock": "Kuota"
-  },
-  {
-    "name": "Free Trial 1x + Konsultasi",
-    "price": "Rp 0",
-    "badge": "Gratis",
-    "stock": "Slot"
-  },
-  {
-    "name": "Personal Trainer 4 Sesi",
-    "price": "Rp 500.000",
-    "badge": "Progres",
-    "stock": "Slot"
-  }
+export const coaches = [
+  { role: 'Coach Gym', badge: 'Estimasi', desc: 'Panduan teknik dasar. Nama coach aktual tanya di lokasi.' },
+  { role: 'Instruktur Kelas', badge: 'Estimasi', desc: 'Memimpin kelas terjadwal. Jadwal cek di lokasi.' },
+  { role: 'Personal Trainer', badge: 'Estimasi', desc: 'Program personal. Tarif & slot tanya di lokasi.' },
+];
+
+export const prices = [
+  { name: 'Kunjungan Coba', price: 'Konfirmasi lokasi', badge: 'Estimasi', desc: 'Tanya resepsionis apakah ada sesi coba.' },
+  { name: 'Harian — 1 Hari', price: 'Rp 30.000', badge: 'Estimasi', desc: 'Harga estimasi Jambi, konfirmasi di lokasi.' },
+  { name: 'Mingguan', price: 'Rp 100.000', badge: 'Estimasi', desc: 'Harga estimasi Jambi, konfirmasi di lokasi.' },
+  { name: 'Bulanan — Full Akses', price: 'Rp 250.000', badge: 'Estimasi', desc: 'Harga estimasi Jambi, konfirmasi di lokasi.' },
+  { name: 'Personal Training 4 Sesi', price: 'Rp 450.000', badge: 'Estimasi', desc: 'Harga estimasi Jambi, konfirmasi di lokasi.' },
+  { name: 'Tahunan', price: 'Rp 2.500.000', badge: 'Estimasi', desc: 'Harga estimasi Jambi, konfirmasi di lokasi.' },
 ];
