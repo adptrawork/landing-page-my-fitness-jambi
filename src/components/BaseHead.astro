@@ -7,7 +7,7 @@ interface Props {
   image?: string;
   crumb?: string;
 }
-const { title, description, canonicalUrl, image = '/images/my-fitness-1.jpg', crumb } = Astro.props;
+const { title, description, canonicalUrl, image = '/images/my-fitness-1.webp', crumb } = Astro.props;
 const ogImage = new URL(image, Astro.site ?? Astro.url).toString();
 const siteOrigin = (Astro.site?.toString() ?? 'https://myfitness-jambi.pages.dev').replace(/\/$/, '');
 

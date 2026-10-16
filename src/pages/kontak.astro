@@ -45,19 +45,13 @@ const faqs = [
         </h2>
 
         <dl class="mt-8 divide-y divide-paper/10 border-y border-paper/10">
-          <div class="flex items-start gap-4 py-4">
-            <span class="mt-0.5 text-accent"><Icon name="pin" class="h-6 w-6" /></span>
-            <div>
-              <dt class="text-[11px] font-semibold uppercase tracking-[0.2em] text-haze">Alamat</dt>
-              <dd class="mt-1 text-base leading-relaxed">{business.address}</dd>
-            </div>
+          <div class="py-4">
+            <dt class="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-haze"><span class="text-accent"><Icon name="pin" class="h-5 w-5" /></span>Alamat</dt>
+            <dd class="mt-1 text-base leading-relaxed">{business.address}</dd>
           </div>
-          <div class="flex items-start gap-4 py-4">
-            <span class="mt-0.5 text-accent"><Icon name="clock" class="h-6 w-6" /></span>
-            <div>
-              <dt class="text-[11px] font-semibold uppercase tracking-[0.2em] text-haze">Jam operasional</dt>
-              <dd class="mt-1 text-base leading-relaxed">{business.hours}</dd>
-            </div>
+          <div class="py-4">
+            <dt class="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-haze"><span class="text-accent"><Icon name="clock" class="h-5 w-5" /></span>Jam operasional</dt>
+            <dd class="mt-1 text-base leading-relaxed">{business.hours}</dd>
           </div>
         </dl>
 

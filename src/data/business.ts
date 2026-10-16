@@ -14,7 +14,7 @@ export const business = {
   description:
     'My Fitness area The Hok Jambi: gym beban & kardio, kelas, personal training untuk warga sekitar. Survei langsung ke lokasi — tanpa komitmen.',
   canonicalPath: '/',
-  ogImage: '/images/my-fitness-1.jpg',
+  ogImage: '/images/my-fitness-1.webp',
 };
 
 export const programs = [
@@ -22,28 +22,28 @@ export const programs = [
     name: 'Open Gym — Beban & Kardio',
     badge: 'Estimasi',
     desc: 'Area latihan beban dan kardio untuk member harian/bulanan. Fasilitas pasti cek lokasi.',
-    img: '/images/my-fitness-1.jpg',
+    img: '/images/my-fitness-1.webp',
     alt: 'Area beban gym My Fitness The Hok Jambi',
   },
   {
     name: 'Kelas Grup',
     badge: 'Estimasi',
     desc: 'Kelas kebugaran terjadwal. Jadwal pasti cek papan info / tanya di lokasi.',
-    img: '/images/my-fitness-2.jpg',
+    img: '/images/my-fitness-2.webp',
     alt: 'Kelas grup kebugaran My Fitness Jambi',
   },
   {
     name: 'Personal Training',
     badge: 'Estimasi',
     desc: 'Program 1-on-1 sesuai target. Ketersediaan trainer tanya di lokasi.',
-    img: '/images/my-fitness-3.jpg',
+    img: '/images/my-fitness-3.webp',
     alt: 'Rak dumbel untuk sesi personal training My Fitness Jambi',
   },
   {
     name: 'Asesmen & Konsultasi Pemula',
     badge: 'Estimasi',
     desc: 'Pemula disarankan asesmen dulu sebelum program. Gratis/tidak tergantung lokasi.',
-    img: '/images/my-fitness-4.jpg',
+    img: '/images/my-fitness-4.webp',
     alt: 'Asesmen awal member baru My Fitness Jambi',
   },
 ];

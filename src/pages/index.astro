@@ -61,7 +61,7 @@ const activity = [
 
       <div class="relative min-h-[52vh] md:min-h-full">
         <img
-          src="/images/my-fitness-1.jpg"
+          src="/images/my-fitness-1.webp"
           alt="Rak dumbel dan area latihan beban di My Fitness The Hok Jambi"
           width="800"
           height="533"
@@ -79,7 +79,7 @@ const activity = [
   </section>
 
   <!-- Ref: ticker fasilitas — marquee CSS transform, otomatis statis saat prefers-reduced-motion -->
-  <div class="ticker border-b border-paper/10 bg-ink-2/50 py-3" aria-label="Sorotan fasilitas My Fitness Jambi">
+  <div class="ticker border-b border-paper/10 bg-ink-2/50 py-3">
     <div class="ticker-track" aria-hidden="true">
       {[0, 1].map(() => (
         <div class="flex shrink-0 items-center">
@@ -278,19 +278,13 @@ const activity = [
           Mampir dulu sebelum daftar
         </h2>
         <dl class="mt-8 divide-y divide-paper/10 border-y border-paper/10">
-          <div class="flex items-start gap-4 py-4">
-            <span class="mt-0.5 text-accent"><Icon name="pin" class="h-6 w-6" /></span>
-            <div>
-              <dt class="text-[11px] font-semibold uppercase tracking-[0.2em] text-haze">Alamat</dt>
-              <dd class="mt-1 text-base leading-relaxed">{business.address}</dd>
-            </div>
+          <div class="py-4">
+            <dt class="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-haze"><span class="text-accent"><Icon name="pin" class="h-5 w-5" /></span>Alamat</dt>
+            <dd class="mt-1 text-base leading-relaxed">{business.address}</dd>
           </div>
-          <div class="flex items-start gap-4 py-4">
-            <span class="mt-0.5 text-accent"><Icon name="clock" class="h-6 w-6" /></span>
-            <div>
-              <dt class="text-[11px] font-semibold uppercase tracking-[0.2em] text-haze">Jam operasional</dt>
-              <dd class="mt-1 text-base leading-relaxed">{business.hours}</dd>
-            </div>
+          <div class="py-4">
+            <dt class="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-haze"><span class="text-accent"><Icon name="clock" class="h-5 w-5" /></span>Jam operasional</dt>
+            <dd class="mt-1 text-base leading-relaxed">{business.hours}</dd>
           </div>
         </dl>
 
