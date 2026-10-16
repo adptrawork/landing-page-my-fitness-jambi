@@ -1,24 +1,40 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { business, programs } from '../data/business';
+const heroCta = business.mapsUrl;
 ---
-<BaseLayout title="Program My Fitness The Hok — Beban, Kelas & PT" description="Program My Fitness The Hok: open gym beban & kardio, kelas grup, personal training, asesmen pemula. Fasilitas pasti dikonfirmasi di lokasi." canonicalPath="/program">
-  <section class="max-w-7xl mx-auto px-4 py-16 md:py-24 md:pr-[18vw]">
-    <p class="font-mono-num text-[11px] tracking-[0.3em] uppercase text-lime-700">Program</p>
-    <h1 class="mt-4 text-4xl md:text-6xl tracking-tighter leading-[1.02]">Empat pintu masuk yang sama</h1>
-    <p class="mt-6 text-lg text-stone-500 max-w-[55ch]">Semua info <strong>Estimasi</strong> — fasilitas pasti cek lokasi.</p>
+<!-- Ref: Unbounce fitness — head (hook) + content + CTA -->
+<BaseLayout title="Semua program & jadwal — My Fitness The Hok Jambi" description="My Fitness area The Hok Jambi: gym beban & kardio, kelas, personal training untuk warga sekitar. Survei langsung ke lokasi — tanpa komitmen." canonicalPath="/Program" image={business.ogImage}>
+  <section class="bg-stone-900 text-white" aria-labelledby="subhead">
+    <div class="max-w-7xl mx-auto px-4 pt-14 pb-12 md:pt-20 md:pb-16">
+      <nav class="font-mono-num text-xs uppercase tracking-[0.18em] text-white/60" aria-label="Breadcrumb"><a href="/" class="hover:text-white">Beranda</a> / Program & kelas</nav>
+      <h1 id="subhead" class="mt-3 max-w-[20ch] text-3xl md:text-5xl font-black uppercase tracking-tighter">Semua program & jadwal</h1>
+      <p class="mt-3 max-w-[60ch] text-base text-white/75">Jadwal lengkap semua program latihan — pilih yang cocok dengan level & waktumu.</p>
+      <a href={heroCta} class="mt-6 inline-flex min-h-[48px] items-center rounded-full bg-lime-700 px-7 text-sm font-black uppercase tracking-wide text-white transition hover:opacity-90">Survei Lokasi</a>
+    </div>
   </section>
-  <section class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-8">
-    {programs.map((p, i) => (
-      <figure class={i === 0 ? 'md:col-span-7' : i === 1 ? 'md:col-span-5 md:mt-20' : i === 2 ? 'md:col-span-5' : 'md:col-span-7 md:-mt-20'}>
-        <img src={p.img} alt={p.alt} width="800" height="600" loading="lazy" class="w-full aspect-[16/10] object-cover rounded-[2.5rem]" />
-        <figcaption class="mt-4">
-          <p class="font-mono-num text-[11px] tracking-[0.25em] uppercase text-lime-700">{p.badge}</p>
-          <p class="mt-1 text-xl tracking-tight">{p.name}</p>
-          <p class="mt-1 text-base text-stone-500">{p.desc}</p>
-        </figcaption>
-      </figure>
-    ))}
+
+  <section class="max-w-7xl mx-auto px-4 py-12 md:py-20" aria-label="Daftar program">
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {programs.map((p) => (
+        <article class="flex flex-col overflow-hidden rounded-3xl border border-stone-200 bg-white">
+          <img src={p.img} alt={p.alt} width="800" height="600" loading="lazy" decoding="async" class="aspect-[16/10] w-full object-cover" />
+          <div class="flex flex-1 flex-col p-6">
+            <p class="font-mono-num text-[11px] font-bold uppercase tracking-[0.18em] text-lime-700">{p.badge}</p>
+            <h2 class="mt-2 text-lg font-extrabold tracking-tight">{p.name}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-stone-600">{p.desc}</p>
+            <a href={heroCta} class="mt-4 inline-flex min-h-[48px] items-center justify-center rounded-full border border-lime-700 px-5 text-sm font-bold uppercase tracking-wide text-lime-700 transition hover:bg-lime-700 hover:text-white">Coba Trial</a>
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="mt-3 text-xs text-stone-400">Foto konteks — ganti foto asli lokasi.</p>
   </section>
-  <p class="max-w-7xl mx-auto px-4 mt-10 text-xs text-stone-400">Sumber foto: Unsplash (bebas lisensi) — ganti foto asli gym.</p>
+  <section class="max-w-7xl mx-auto px-4 pb-12 md:pb-20" aria-label="Ajakan">
+    <div class="rounded-3xl bg-stone-900 p-8 text-white md:p-10">
+      <p class="text-2xl font-black uppercase tracking-tight">Masih bingung pilih program?</p>
+      <p class="mt-2 text-sm text-white/70">Tanya gratis — admin bantu pilihkan sesuai level & tujuanmu.</p>
+      <a href={heroCta} class="mt-5 inline-flex min-h-[48px] items-center rounded-full bg-white px-8 text-sm font-black uppercase tracking-wide text-stone-900">Survei Lokasi</a>
+    </div>
+  </section>
 </BaseLayout>

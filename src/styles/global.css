@@ -1,61 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+/* Fonts dimuat via <link> di BaseHead (preconnect + media=print onload) — tanpa @import render-blocking. */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --ease-gallery: cubic-bezier(0.16, 1, 0.3, 1);
-}
+:root { --ease-snap: cubic-bezier(0.16, 1, 0.3, 1); }
 
 html { scroll-behavior: smooth; }
-
 body {
   font-family: 'Outfit', ui-sans-serif, system-ui, sans-serif;
-  background: #fafaf9;
-  color: #1c1917;
-  font-weight: 300;
   -webkit-font-smoothing: antialiased;
 }
-strong, b, h1, h2, h3 { font-weight: 600; }
+.font-mono-num { font-family: 'JetBrains Mono', 'Geist Mono', ui-monospace, monospace; }
 
-.font-mono-num { font-family: 'JetBrains Mono', ui-monospace, monospace; }
-
-/* Gallery drift-in with stagger */
-.drift { opacity: 0; animation: drift-in 0.9s var(--ease-gallery) forwards; }
-.d1 { animation-delay: 0.08s; } .d2 { animation-delay: 0.18s; }
-.d3 { animation-delay: 0.28s; } .d4 { animation-delay: 0.38s; }
-.d5 { animation-delay: 0.48s; } .d6 { animation-delay: 0.58s; }
-@keyframes drift-in {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Entrance */
+.rise { opacity: 0; animation: rise-in 0.7s var(--ease-snap) forwards; }
+.d1 { animation-delay: 0.05s; } .d2 { animation-delay: 0.12s; } .d3 { animation-delay: 0.19s; }
+.d4 { animation-delay: 0.26s; } .d5 { animation-delay: 0.33s; } .d6 { animation-delay: 0.4s; }
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(24px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Shimmer skeleton for bento price cards */
-.shimmer { position: relative; overflow: hidden; }
-.shimmer::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(100deg, transparent 20%, rgba(101, 163, 13, 0.12) 50%, transparent 80%);
-  transform: translateX(-100%);
-  animation: shimmer-pass 2.4s var(--ease-gallery) 0.2s 2;
-  pointer-events: none;
-}
-@keyframes shimmer-pass {
-  to { transform: translateX(100%); }
-}
+/* Marquee: overflow-hidden wajib */
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee-track { display: flex; width: max-content; animation: slide-x 24s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes slide-x { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* Drag-to-pan rails */
-.pan { cursor: grab; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
-.pan:active { cursor: grabbing; }
-.pan > * { scroll-snap-align: start; }
+/* Snap rail + scroll-padding + hint */
+.snap-rail { scroll-snap-type: x mandatory; scroll-padding-inline: 1rem; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+.snap-rail > * { scroll-snap-align: start; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }
 
-.float-soft { transition: transform 0.6s var(--ease-gallery), box-shadow 0.6s var(--ease-gallery); }
-.float-soft:hover { transform: translateY(-4px); }
+/* Skeleton shimmer untuk blok harga */
+.skeleton { position: relative; overflow: hidden; }
+.skeleton::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,0.55) 50%, transparent 80%);
+  animation: shimmer 1.6s linear infinite;
+}
+@keyframes shimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+
+/* Hamburger CSS-only (checkbox peer) */
+.nav-toggle { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.burger span { display: block; width: 22px; height: 2px; background: currentColor; border-radius: 2px; transition: transform 0.3s var(--ease-snap), opacity 0.2s; }
+.burger span + span { margin-top: 5px; }
+.nav-toggle:checked + nav .burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle:checked + nav .burger span:nth-child(2) { opacity: 0; }
+.nav-toggle:checked + nav .burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu { display: none; }
+.nav-toggle:checked + nav .mobile-menu { display: block; }
+.nav-toggle:focus-visible + nav .burger { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 6px; }
+
+a, button { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 2px solid #0f766e; outline-offset: 3px; border-radius: 6px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .drift { animation: none; opacity: 1; }
-  .shimmer::after { display: none; }
+  .rise { animation: none; opacity: 1; }
+  .marquee-track, .skeleton::after { animation: none; }
   html { scroll-behavior: auto; }
 }
