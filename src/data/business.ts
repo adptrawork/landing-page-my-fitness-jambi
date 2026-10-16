@@ -37,7 +37,7 @@ export const programs = [
     badge: 'Estimasi',
     desc: 'Program 1-on-1 sesuai target. Ketersediaan trainer tanya di lokasi.',
     img: '/images/my-fitness-3.jpg',
-    alt: 'Sesi personal training My Fitness Jambi',
+    alt: 'Rak dumbel untuk sesi personal training My Fitness Jambi',
   },
   {
     name: 'Asesmen & Konsultasi Pemula',
