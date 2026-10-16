@@ -10,9 +10,9 @@ export const business = {
   mapsEmbed: 'https://maps.google.com/maps?q=My%20Fitness%20The%20Hok%20Jambi&t=&z=15&ie=UTF8&iwloc=&output=embed',
   address: 'The Hok, Kota Jambi — titik pasti cek Google Maps',
   hours: 'Jam operasional konfirmasi via kunjungan / Google Maps',
-  title: 'My Fitness Jambi The Hok — Gym Dekat Rumah',
+  title: 'My Fitness The Hok Jambi — Gym Dekat Rumah Warga',
   description:
-    'My Fitness Jambi area The Hok: gym beban & kardio, kelas, personal training. Harga estimasi — konfirmasi langsung di lokasi.',
+    'My Fitness area The Hok Jambi: gym beban & kardio, kelas, personal training untuk warga sekitar. Survei langsung ke lokasi — tanpa komitmen.',
   canonicalPath: '/',
   ogImage: '/images/my-fitness-1.jpg',
 };

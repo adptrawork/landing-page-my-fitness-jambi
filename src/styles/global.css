@@ -1,31 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-gallery: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Outfit', ui-sans-serif, system-ui, sans-serif;
-  background: #f9fafb;
-  color: #09090b;
+  background: #fafaf9;
+  color: #1c1917;
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
 }
+strong, b, h1, h2, h3 { font-weight: 600; }
 
 .font-mono-num { font-family: 'JetBrains Mono', ui-monospace, monospace; }
 
-.reveal { animation: rise 0.7s var(--ease-premium) both; }
-@keyframes rise {
-  from { opacity: 0; transform: translateY(18px); }
+/* Gallery drift-in with stagger */
+.drift { opacity: 0; animation: drift-in 0.9s var(--ease-gallery) forwards; }
+.d1 { animation-delay: 0.08s; } .d2 { animation-delay: 0.18s; }
+.d3 { animation-delay: 0.28s; } .d4 { animation-delay: 0.38s; }
+.d5 { animation-delay: 0.48s; } .d6 { animation-delay: 0.58s; }
+@keyframes drift-in {
+  from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Shimmer skeleton for bento price cards */
+.shimmer { position: relative; overflow: hidden; }
+.shimmer::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(100deg, transparent 20%, rgba(101, 163, 13, 0.12) 50%, transparent 80%);
+  transform: translateX(-100%);
+  animation: shimmer-pass 2.4s var(--ease-gallery) 0.2s 2;
+  pointer-events: none;
+}
+@keyframes shimmer-pass {
+  to { transform: translateX(100%); }
+}
+
+/* Drag-to-pan rails */
+.pan { cursor: grab; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.pan:active { cursor: grabbing; }
+.pan > * { scroll-snap-align: start; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+.float-soft { transition: transform 0.6s var(--ease-gallery), box-shadow 0.6s var(--ease-gallery); }
+.float-soft:hover { transform: translateY(-4px); }
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal { animation: none; }
+  .drift { animation: none; opacity: 1; }
+  .shimmer::after { display: none; }
   html { scroll-behavior: auto; }
 }

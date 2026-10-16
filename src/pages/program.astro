@@ -2,26 +2,23 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { business, programs } from '../data/business';
 ---
-<BaseLayout title={`Program ${business.name} — Gym, Kelas & PT`} description={`Program My Fitness Jambi The Hok: open gym beban & kardio, kelas grup, personal training, asesmen pemula. Semua estimasi — konfirmasi di lokasi.`} canonicalPath="/program">
-  <section class="max-w-7xl mx-auto px-4 py-12">
-    <p class="text-sm font-medium text-sky-700">Program</p>
-    <h1 class="mt-2 text-4xl md:text-6xl tracking-tighter leading-none font-bold">Program latihan My Fitness</h1>
-    <p class="mt-3 text-base text-gray-600 max-w-[65ch]">Semua info <strong>Estimasi</strong> — tidak ada sumber online resmi. Pastikan dengan survei langsung ke lokasi di The Hok.</p>
-    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-      {programs.map((p, i) => (
-        <article class={i % 2 === 1 ? 'md:mt-10' : ''}>
-          <div class="bg-white border border-slate-200/50 rounded-[2.5rem] overflow-hidden shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)]">
-            <img src={p.img} alt={p.alt} width="800" height="600" loading="lazy" class="w-full aspect-[16/9] object-cover" />
-            <div class="p-7">
-              <p class="text-xs font-medium text-sky-700">{p.badge}</p>
-              <h2 class="mt-1 font-semibold text-lg">{p.name}</h2>
-              <p class="mt-1 text-base text-gray-600">{p.desc}</p>
-              <a href="/kontak" class="mt-4 inline-block bg-zinc-950 text-white px-5 py-2.5 rounded-full text-sm">Info Kunjungan</a>
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
-    <p class="mt-6 text-xs text-zinc-400">Sumber foto: Unsplash (foto konteks gym/kelas/coaching, bebas lisensi) — ganti foto asli gym.</p>
+<BaseLayout title="Program My Fitness The Hok — Beban, Kelas & PT" description="Program My Fitness The Hok: open gym beban & kardio, kelas grup, personal training, asesmen pemula. Fasilitas pasti dikonfirmasi di lokasi." canonicalPath="/program">
+  <section class="max-w-7xl mx-auto px-4 py-16 md:py-24 md:pr-[18vw]">
+    <p class="font-mono-num text-[11px] tracking-[0.3em] uppercase text-lime-700">Program</p>
+    <h1 class="mt-4 text-4xl md:text-6xl tracking-tighter leading-[1.02]">Empat pintu masuk yang sama</h1>
+    <p class="mt-6 text-lg text-stone-500 max-w-[55ch]">Semua info <strong>Estimasi</strong> — fasilitas pasti cek lokasi.</p>
   </section>
+  <section class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-8">
+    {programs.map((p, i) => (
+      <figure class={i === 0 ? 'md:col-span-7' : i === 1 ? 'md:col-span-5 md:mt-20' : i === 2 ? 'md:col-span-5' : 'md:col-span-7 md:-mt-20'}>
+        <img src={p.img} alt={p.alt} width="800" height="600" loading="lazy" class="w-full aspect-[16/10] object-cover rounded-[2.5rem]" />
+        <figcaption class="mt-4">
+          <p class="font-mono-num text-[11px] tracking-[0.25em] uppercase text-lime-700">{p.badge}</p>
+          <p class="mt-1 text-xl tracking-tight">{p.name}</p>
+          <p class="mt-1 text-base text-stone-500">{p.desc}</p>
+        </figcaption>
+      </figure>
+    ))}
+  </section>
+  <p class="max-w-7xl mx-auto px-4 mt-10 text-xs text-stone-400">Sumber foto: Unsplash (bebas lisensi) — ganti foto asli gym.</p>
 </BaseLayout>

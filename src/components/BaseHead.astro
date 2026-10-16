@@ -7,6 +7,27 @@ interface Props {
 }
 const { title, description, canonicalUrl, image = '/images/my-fitness-1.jpg' } = Astro.props;
 const ogImage = new URL(image, Astro.site ?? Astro.url).toString();
+const faq = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Di mana lokasi My Fitness Jambi?",
+      acceptedAnswer: { "@type": "Answer", text: "My Fitness berada di area The Hok, Kota Jambi. Titik pastinya cek Google Maps 'My Fitness The Hok Jambi' sebelum berkunjung." }
+    },
+    {
+      "@type": "Question",
+      name: "Apakah My Fitness Jambi cocok untuk warga sekitar The Hok?",
+      acceptedAnswer: { "@type": "Answer", text: "Ya. Keunggulannya adalah jarak dekat bagi warga The Hok dan sekitarnya, sehingga latihan beban, kardio, dan kelas lebih mudah dijadikan rutinitas." }
+    },
+    {
+      "@type": "Question",
+      name: "Berapa harga member My Fitness Jambi?",
+      acceptedAnswer: { "@type": "Answer", text: "Harga bersifat estimasi (contoh: bulanan sekitar Rp 250.000) dan wajib dikonfirmasi langsung di lokasi karena belum ada price list resmi yang terverifikasi." }
+    }
+  ]
+};
 ---
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -18,10 +39,13 @@ const ogImage = new URL(image, Astro.site ?? Astro.url).toString();
 <meta name="description" content={description} />
 <meta name="robots" content="index, follow" />
 <meta property="og:type" content="website" />
+<meta property="og:locale" content="id_ID" />
+<meta property="og:site_name" content="My Fitness Jambi — Gym Warga The Hok" />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImage} />
+<meta property="og:image:alt" content="Area beban gym My Fitness The Hok Jambi" />
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={canonicalUrl} />
 <meta property="twitter:title" content={title} />
@@ -31,8 +55,10 @@ const ogImage = new URL(image, Astro.site ?? Astro.url).toString();
   "@context": "https://schema.org",
   "@type": "ExerciseGym",
   name: "My Fitness Jambi",
-  url: "https://my-fitness-jambi.pages.dev",
+  url: "https://myfitness-jambi.pages.dev",
   image: ogImage,
   description: description,
+  exerciseType: ["GeneralFitness"],
   address: { "@type": "PostalAddress", addressLocality: "The Hok, Kota Jambi", addressRegion: "Jambi", addressCountry: "ID" }
 })} />
+<script type="application/ld+json" set:html={JSON.stringify(faq)} />
