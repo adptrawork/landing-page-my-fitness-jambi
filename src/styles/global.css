@@ -1,64 +1,82 @@
-/* Fonts dimuat via <link> di BaseHead (preconnect + media=print onload) — tanpa @import render-blocking. */
+/* Font dimuat via <link> di BaseHead (preconnect + media=print onload) — tanpa @import render-blocking. */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root { --ease-snap: cubic-bezier(0.16, 1, 0.3, 1); }
+:root {
+  --bg: #11130F;
+  --bg-2: #33372D;
+  --fg: #F6F6EF;
+  --fg-soft: #A3A79B; /* kontras 7.7:1 di atas #11130F — lolos WCAG AA */
+  --accent: #CDE05A;
+  --rule: rgba(246, 246, 239, 0.14);
+  --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
+}
 
 html { scroll-behavior: smooth; }
+
 body {
-  font-family: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-.font-mono-num { font-family: 'JetBrains Mono', 'Geist Mono', ui-monospace, monospace; }
 
-/* Entrance */
-.rise { opacity: 0; animation: rise-in 0.7s var(--ease-snap) forwards; }
-.d1 { animation-delay: 0.05s; } .d2 { animation-delay: 0.12s; } .d3 { animation-delay: 0.19s; }
-.d4 { animation-delay: 0.26s; } .d5 { animation-delay: 0.33s; } .d6 { animation-delay: 0.4s; }
+/* Display = Barlow Condensed. Condensed butuh sedikit letter-spacing negatif + weight tebal. */
+.font-display { font-family: 'Barlow Condensed', 'Public Sans', ui-sans-serif, system-ui, sans-serif; }
+.num { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+
+/* Skip link — hanya terlihat saat fokus keyboard. */
+.skip-link {
+  position: absolute; left: 1rem; top: -3rem; z-index: 60;
+  padding: 0.75rem 1.25rem; border-radius: 9999px;
+  background: var(--accent); color: var(--bg); font-weight: 700;
+  transition: transform 0.2s var(--ease-snap);
+}
+.skip-link:focus { transform: translateY(4.25rem); }
+
+/* Entrance — hanya transform/opacity, hormati prefers-reduced-motion. */
+.rise { opacity: 0; animation: rise-in 0.6s var(--ease-snap) forwards; }
+.rise { animation-delay: calc(var(--i, 0) * 90ms); }
 @keyframes rise-in {
-  from { opacity: 0; transform: translateY(24px) scale(0.99); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Marquee: overflow-hidden wajib */
-.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-.marquee-track { display: flex; width: max-content; animation: slide-x 24s linear infinite; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
-@keyframes slide-x { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* Ticker: overflow-hidden wajib, animasi murni transform. */
+.ticker { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.ticker-track { display: flex; width: max-content; animation: ticker-x 30s linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+@keyframes ticker-x { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
 
-/* Snap rail + scroll-padding + hint */
-.snap-rail { scroll-snap-type: x mandatory; scroll-padding-inline: 1rem; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
-.snap-rail > * { scroll-snap-align: start; }
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { scrollbar-width: none; }
-
-/* Skeleton shimmer untuk blok harga */
-.skeleton { position: relative; overflow: hidden; }
-.skeleton::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,0.55) 50%, transparent 80%);
-  animation: shimmer 1.6s linear infinite;
-}
-@keyframes shimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
-
-/* Hamburger CSS-only (checkbox peer) */
-.nav-toggle { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-.burger span { display: block; width: 22px; height: 2px; background: currentColor; border-radius: 2px; transition: transform 0.3s var(--ease-snap), opacity 0.2s; }
+/* Hamburger CSS-only (checkbox ~ sibling) */
+.nav-toggle { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.burger span { display: block; width: 22px; height: 2px; background: currentColor; transition: transform 0.3s var(--ease-snap), opacity 0.2s; }
 .burger span + span { margin-top: 5px; }
-.nav-toggle:checked + nav .burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav-toggle:checked + nav .burger span:nth-child(2) { opacity: 0; }
-.nav-toggle:checked + nav .burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-.mobile-menu { display: none; }
-.nav-toggle:checked + nav .mobile-menu { display: block; }
-.nav-toggle:focus-visible + nav .burger { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 6px; }
+.nav-toggle:checked ~ header .burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle:checked ~ header .burger span:nth-child(2) { opacity: 0; }
+.nav-toggle:checked ~ header .burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+#mobile-menu { display: none; }
+@media (max-width: 767px) {
+  .nav-toggle:checked ~ #mobile-menu { display: block; }
+}
+.nav-toggle:focus-visible ~ header .burger { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
 
-a, button { -webkit-tap-highlight-color: transparent; }
-:focus-visible { outline: 2px solid #0f766e; outline-offset: 3px; border-radius: 6px; }
+a, button, summary, label { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+/* Tabel harga responsif: <md jadi kartu bertumpuk (bukan scroll horizontal). */
+@media (max-width: 767px) {
+  .price-table, .price-table tbody, .price-table tr, .price-table th, .price-table td { display: block; width: 100%; }
+  .price-table thead { display: none; }
+  .price-table tr { border: 1px solid var(--rule); border-radius: 1.25rem; padding: 1.25rem; margin-bottom: 1rem; }
+  .price-table tr + tr { margin-top: 0; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .rise { animation: none; opacity: 1; }
-  .marquee-track, .skeleton::after { animation: none; }
+  .ticker-track { animation: none; }
   html { scroll-behavior: auto; }
+  * { transition-duration: 0.01ms !important; }
 }

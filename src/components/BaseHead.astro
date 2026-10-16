@@ -1,12 +1,16 @@
 ---
+interface Crumb { name: string; path: string; }
 interface Props {
   title: string;
   description: string;
   canonicalUrl: string;
   image?: string;
+  crumb?: string;
 }
-const { title, description, canonicalUrl, image = '/images/my-fitness-1.jpg' } = Astro.props;
+const { title, description, canonicalUrl, image = '/images/my-fitness-1.jpg', crumb } = Astro.props;
 const ogImage = new URL(image, Astro.site ?? Astro.url).toString();
+const siteOrigin = (Astro.site?.toString() ?? 'https://myfitness-jambi.pages.dev').replace(/\/$/, '');
+
 const faq = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -14,19 +18,34 @@ const faq = {
     {
       "@type": "Question",
       name: "Di mana lokasi My Fitness Jambi?",
-      acceptedAnswer: { "@type": "Answer", text: "My Fitness berada di area The Hok, Kota Jambi. Titik pastinya cek Google Maps 'My Fitness The Hok Jambi' sebelum berkunjung." }
+      acceptedAnswer: { "@type": "Answer", text: "My Fitness berada di area The Hok, Jambi Selatan, Kota Jambi. Titik pastinya cek Google Maps 'My Fitness The Hok Jambi' sebelum berkunjung." }
     },
     {
       "@type": "Question",
-      name: "Apakah My Fitness Jambi cocok untuk warga sekitar The Hok?",
-      acceptedAnswer: { "@type": "Answer", text: "Ya. Keunggulannya adalah jarak dekat bagi warga The Hok dan sekitarnya, sehingga latihan beban, kardio, dan kelas lebih mudah dijadikan rutinitas." }
+      name: "Apakah cocok untuk warga sekitar The Hok?",
+      acceptedAnswer: { "@type": "Answer", text: "Keunggulan utamanya adalah jarak dekat bagi warga The Hok dan sekitarnya, sehingga latihan beban, kardio, dan kelas lebih mudah dijadikan rutinitas harian." }
     },
     {
       "@type": "Question",
-      name: "Berapa harga member My Fitness Jambi?",
-      acceptedAnswer: { "@type": "Answer", text: "Harga bersifat estimasi (contoh: bulanan sekitar Rp 250.000) dan wajib dikonfirmasi langsung di lokasi karena belum ada price list resmi yang terverifikasi." }
+      name: "Berapa harga keanggotaan My Fitness Jambi?",
+      acceptedAnswer: { "@type": "Answer", text: "Harga pada situs ini bersifat estimasi rata-rata gym Jambi (contoh: bulanan sekitar Rp 250.000) dan wajib dikonfirmasi langsung di lokasi karena belum ada price list resmi yang terverifikasi." }
     }
   ]
+};
+
+const breadcrumbItems: Crumb[] = [
+  { name: 'Beranda', path: '/' },
+  ...(crumb ? [{ name: crumb, path: new URL(canonicalUrl).pathname }] : []),
+];
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: breadcrumbItems.map((c, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: c.name,
+    item: `${siteOrigin}${c.path}`,
+  })),
 };
 ---
 <meta charset="utf-8" />
@@ -34,14 +53,25 @@ const faq = {
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=JetBrains+Mono:wght@500&display=swap" media="print" onload="this.media='all'" />
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;1,600&family=Public+Sans:wght@400;500;600;700&display=swap"
+  media="print"
+  onload="this.setAttribute('media','all')"
+/>
+<noscript>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;1,600&family=Public+Sans:wght@400;500;600;700&display=swap"
+  />
+</noscript>
 <meta name="generator" content={Astro.generator} />
 <link rel="canonical" href={canonicalUrl} />
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#11130F" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="id_ID" />
 <meta property="og:site_name" content="My Fitness Jambi — Gym Warga The Hok" />
@@ -49,20 +79,26 @@ const faq = {
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImage} />
-<meta property="og:image:alt" content="Area beban gym My Fitness The Hok Jambi" />
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={canonicalUrl} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={ogImage} />
+<meta property="og:image:alt" content="Area beban dan rak dumbel My Fitness The Hok Jambi" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
 <script type="application/ld+json" set:html={JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "ExerciseGym",
+  "@type": ["ExerciseGym", "LocalBusiness"],
   name: "My Fitness Jambi",
-  url: "https://myfitness-jambi.pages.dev",
+  url: siteOrigin,
   image: ogImage,
   description: description,
   exerciseType: ["GeneralFitness"],
-  address: { "@type": "PostalAddress", addressLocality: "The Hok, Kota Jambi", addressRegion: "Jambi", addressCountry: "ID" }
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "The Hok, Jambi Selatan",
+    addressRegion: "Jambi",
+    addressCountry: "ID"
+  }
 })} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
 <script type="application/ld+json" set:html={JSON.stringify(faq)} />

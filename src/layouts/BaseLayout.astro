@@ -1,66 +1,132 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import '../styles/global.css';
-interface Props { title: string; description: string; canonicalPath?: string; image?: string; }
-const { title, description, canonicalPath = '/', image } = Astro.props;
+import { business } from '../data/business';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  image?: string;
+  crumb?: string;
+}
+const { title, description, canonicalPath = '/', image, crumb } = Astro.props;
 const site = (Astro.site?.toString() ?? 'https://myfitness-jambi.pages.dev').replace(/\/$/, '');
 const canonicalUrl = `${site}${canonicalPath}`;
-import { business } from '../data/business';
+
+const nav = [
+  { href: '/', label: 'Beranda' },
+  { href: '/program/', label: 'Program' },
+  { href: '/pelatih/', label: 'Pelatih' },
+  { href: '/harga/', label: 'Harga' },
+  { href: '/kontak/', label: 'Kontak' },
+];
+const current = canonicalPath.replace(/\/+$/, '') || '/';
+const isActive = (href: string) => href.replace(/\/+$/, '') === current || (current === '/' && href === '/');
 const cta = business.mapsUrl;
 ---
 <!doctype html>
 <html lang="id">
 <head>
-  <BaseHead title={title} description={description} canonicalUrl={canonicalUrl} image={image} />
+  <BaseHead title={title} description={description} canonicalUrl={canonicalUrl} image={image} crumb={crumb} />
 </head>
-<body class="bg-stone-50 text-stone-900 antialiased">
-  <div class="border-b border-lime-700/15 bg-lime-700/[0.05]">
-    <p class="max-w-7xl mx-auto px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-lime-700">Gym warga The Hok &bull; Tanpa komitmen &bull; Survei langsung ke lokasi</p>
-  </div>
-  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Buka tutup menu navigasi" />
-  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-stone-200/70">
-    <nav class="max-w-7xl mx-auto flex items-center justify-between gap-3 px-4 py-3" aria-label="Navigasi utama">
-      <a href="/" class="flex items-center gap-2.5 min-h-[48px]">
-        <span class="grid place-items-center w-9 h-9 rounded-xl bg-lime-700 text-white font-black" aria-hidden="true">M</span>
-        <span class="font-black tracking-tight uppercase leading-none">My Fitness<small class="block text-[10px] font-bold tracking-[0.2em] text-lime-700">THE HOK &mdash; JAMBI</small></span>
+<body class="bg-ink text-paper antialiased">
+  <a class="skip-link" href="#konten">Lewati ke konten utama</a>
+
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Buka atau tutup menu navigasi" />
+
+  <header class="sticky top-0 z-40 border-b border-paper/10 bg-ink/90 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3" aria-label="Navigasi utama">
+      <a href="/" class="flex min-h-[48px] items-center gap-3" aria-label="My Fitness Jambi — beranda">
+        <span class="grid h-10 w-10 place-items-center rounded-lg bg-accent font-display text-xl font-bold text-ink" aria-hidden="true">MF</span>
+        <span class="font-display text-lg font-semibold uppercase leading-none tracking-wide">
+          My Fitness
+          <span class="mt-1 block font-sans text-[10px] font-semibold uppercase tracking-[0.24em] text-haze">The Hok &mdash; Jambi</span>
+        </span>
       </a>
-      <div class="hidden md:flex items-center gap-6 text-sm font-bold uppercase tracking-wide text-stone-600">
-        <a href="/" class="min-h-[48px] inline-flex items-center hover:text-lime-700 transition">Beranda</a>
-        <a href="/program" class="min-h-[48px] inline-flex items-center hover:text-lime-700 transition">Program</a>
-        <a href="/pelatih" class="min-h-[48px] inline-flex items-center hover:text-lime-700 transition">Pelatih</a>
-        <a href="/harga" class="min-h-[48px] inline-flex items-center hover:text-lime-700 transition">Harga</a>
-        <a href="/kontak" class="min-h-[48px] inline-flex items-center hover:text-lime-700 transition">Kontak</a>
-      </div>
+
+      <ul class="hidden items-center gap-7 md:flex">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+              class:list={[
+                'inline-flex min-h-[48px] items-center text-sm font-semibold uppercase tracking-[0.12em] transition-colors active:-translate-y-px',
+                isActive(item.href) ? 'text-accent' : 'text-haze hover:text-paper',
+              ]}
+            >{item.label}</a>
+          </li>
+        ))}
+      </ul>
+
       <div class="flex items-center gap-2">
-        <a href={cta} class="hidden sm:inline-flex items-center min-h-[48px] px-5 rounded-full text-sm font-bold uppercase tracking-wide bg-lime-700 text-white transition hover:bg-lime-800 active:scale-[0.98]">Survei Lokasi</a>
-        <label for="nav-toggle" class="burger md:hidden grid place-items-center min-w-[48px] min-h-[48px] rounded-xl border border-stone-300 cursor-pointer" aria-hidden="true"><span></span><span></span><span></span></label>
-      </div>
-      <div class="mobile-menu absolute inset-x-0 top-full bg-white border-b border-stone-200 shadow-lg md:hidden">
-        <div class="px-4 py-3 flex flex-col text-sm font-bold uppercase tracking-wide">
-          <a href="/" class="min-h-[48px] inline-flex items-center border-b border-stone-100">Beranda</a>
-          <a href="/program" class="min-h-[48px] inline-flex items-center border-b border-stone-100">Program</a>
-          <a href="/pelatih" class="min-h-[48px] inline-flex items-center border-b border-stone-100">Pelatih</a>
-          <a href="/harga" class="min-h-[48px] inline-flex items-center border-b border-stone-100">Harga</a>
-          <a href="/kontak" class="min-h-[48px] inline-flex items-center border-b border-stone-100">Kontak</a>
-          <a href={cta} class="mt-3 inline-flex items-center justify-center min-h-[48px] rounded-full bg-lime-700 text-white">Survei Lokasi</a>
-        </div>
+        <a
+          href={cta}
+          class="hidden min-h-[48px] items-center gap-2 rounded-full bg-accent px-5 text-sm font-bold uppercase tracking-[0.1em] text-ink transition-transform hover:-translate-y-0.5 active:scale-[0.98] sm:inline-flex"
+        >
+          Rute lokasi
+        </a>
+        <label
+          for="nav-toggle"
+          class="burger grid min-h-[48px] min-w-[48px] cursor-pointer place-items-center rounded-lg border border-paper/20 text-paper md:hidden"
+          aria-hidden="true"
+        ><span></span><span></span><span></span></label>
       </div>
     </nav>
   </header>
-  <main><slot /></main>
-  <footer class="mt-20 bg-stone-900 text-white">
-    <div class="max-w-7xl mx-auto px-4 py-12 grid gap-8 grid-cols-1 md:grid-cols-12">
-      <div class="md:col-span-7">
-        <p class="font-black uppercase tracking-tight text-xl">My Fitness Jambi</p>
-        <p class="mt-2 text-base text-white/70 leading-relaxed max-w-[65ch]">{business.address} &mdash; {business.hours}</p>
-      </div>
+
+  <div id="mobile-menu" class="md:hidden">
+    <ul class="border-b border-paper/10 bg-ink-2/60 px-4 py-2 backdrop-blur-xl">
+      {nav.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class:list={[
+              'flex min-h-[48px] items-center border-b border-paper/10 text-sm font-semibold uppercase tracking-[0.12em]',
+              isActive(item.href) ? 'text-accent' : 'text-paper',
+            ]}
+          >{item.label}</a>
+        </li>
+      ))}
+      <li class="py-3">
+        <a href={cta} class="flex min-h-[48px] items-center justify-center rounded-full bg-accent px-5 text-sm font-bold uppercase tracking-[0.1em] text-ink active:scale-[0.98]">Rute lokasi</a>
+      </li>
+    </ul>
+  </div>
+
+  <main id="konten"><slot /></main>
+
+  <footer class="mt-24 border-t border-paper/10 bg-ink">
+    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-14 md:grid-cols-12">
       <div class="md:col-span-5">
-        <p class="font-bold text-sm uppercase tracking-widest">Hubungi</p>
-        <div class="mt-3 flex flex-col gap-2 text-sm font-medium">
-          <a href={business.mapsUrl} class="underline underline-offset-4 min-h-[48px] inline-flex items-center">Google Maps &mdash; rute ke lokasi</a>
-        </div>
-        <p class="mt-6 text-xs text-white/40">&copy; 2026 My Fitness &mdash; Kota Jambi.</p>
+        <p class="font-display text-2xl font-bold uppercase tracking-wide">My Fitness Jambi</p>
+        <p class="mt-3 max-w-[42ch] text-sm leading-relaxed text-haze">
+          Gym warga di kawasan The Hok, Jambi Selatan. Area beban &amp; kardio, kelas grup, dan personal training
+          untuk warga sekitar.
+        </p>
       </div>
+      <div class="md:col-span-4">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-haze">Lokasi &amp; jam</p>
+        <address class="mt-3 not-italic text-sm leading-relaxed">
+          My Fitness<br />{business.address}<br />{business.hours}
+        </address>
+      </div>
+      <div class="md:col-span-3">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-haze">Rute</p>
+        <a href={business.mapsUrl} class="mt-3 inline-flex min-h-[48px] items-center gap-2 text-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent">
+          Google Maps &mdash; petunjuk arah
+        </a>
+        <p class="mt-4 text-xs leading-relaxed text-haze">
+          Nomor WhatsApp resmi belum terverifikasi &mdash; silakan datang langsung atau cek peta.
+        </p>
+      </div>
+    </div>
+    <div class="border-t border-paper/10">
+      <p class="mx-auto max-w-7xl px-4 py-5 text-xs text-haze">
+        &copy; 2026 My Fitness Jambi &mdash; Kota Jambi. Jam, harga, dan fasilitas bersifat estimasi; konfirmasi di lokasi.
+      </p>
     </div>
   </footer>
 </body>

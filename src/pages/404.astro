@@ -1,10 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
 ---
-<BaseLayout title="404 — Halaman tidak ditemukan" description="Halaman tidak ditemukan.">
-  <div class="max-w-xl mx-auto px-4 py-20 text-center">
-    <h1 class="text-5xl font-extrabold">404</h1>
-    <p class="mt-4">Halaman tidak ditemukan.</p>
-    <a href="/" class="mt-6 inline-block underline">Kembali ke beranda</a>
-  </div>
+<!-- Ref: athletic 404 — tipografi condensed, satu CTA kembali + satu CTA lokasi -->
+<BaseLayout title="404 — Halaman Tidak Ditemukan di Situs My Fitness Jambi" description="Halaman yang kamu cari tidak ditemukan di situs My Fitness Jambi. Kembali ke beranda, atau lanjut ke kontak dan program untuk menemukan yang kamu butuhkan.">
+  <section class="mx-auto flex max-w-3xl flex-col items-start px-4 py-24 md:py-32" aria-labelledby="nf-title">
+    <p class="font-display num text-7xl font-bold leading-none text-accent md:text-9xl">404</p>
+    <h1 id="nf-title" class="font-display mt-4 text-3xl font-bold uppercase leading-none tracking-tight md:text-5xl">
+      Halaman tidak ditemukan
+    </h1>
+    <p class="mt-4 max-w-[52ch] text-base leading-relaxed text-haze">
+      Tautan mungkin salah atau halaman sudah dipindahkan. Kamu bisa kembali ke beranda atau langsung melihat
+      lokasi dan program.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/" class="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-accent px-7 text-sm font-bold uppercase tracking-[0.1em] text-ink transition-transform hover:-translate-y-0.5 active:scale-[0.98]">
+        Ke beranda
+        <Icon name="arrow" class="h-5 w-5" />
+      </a>
+      <a href="/kontak/" class="inline-flex min-h-[48px] items-center rounded-full border border-paper/30 px-7 text-sm font-bold uppercase tracking-[0.1em] text-paper transition-colors hover:border-accent hover:text-accent active:scale-[0.98]">
+        Kontak &amp; lokasi
+      </a>
+    </div>
+  </section>
 </BaseLayout>

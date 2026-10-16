@@ -1,40 +1,82 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
 import { business, programs } from '../data/business';
-const heroCta = business.mapsUrl;
+const maps = business.mapsUrl;
 ---
-<!-- Ref: Unbounce fitness — head (hook) + content + CTA -->
-<BaseLayout title="Semua program & jadwal — My Fitness The Hok Jambi" description="My Fitness area The Hok Jambi: gym beban & kardio, kelas, personal training untuk warga sekitar. Survei langsung ke lokasi — tanpa komitmen." canonicalPath="/Program" image={business.ogImage}>
-  <section class="bg-stone-900 text-white" aria-labelledby="subhead">
-    <div class="max-w-7xl mx-auto px-4 pt-14 pb-12 md:pt-20 md:pb-16">
-      <nav class="font-mono-num text-xs uppercase tracking-[0.18em] text-white/60" aria-label="Breadcrumb"><a href="/" class="hover:text-white">Beranda</a> / Program & kelas</nav>
-      <h1 id="subhead" class="mt-3 max-w-[20ch] text-3xl md:text-5xl font-black uppercase tracking-tighter">Semua program & jadwal</h1>
-      <p class="mt-3 max-w-[60ch] text-base text-white/75">Jadwal lengkap semua program latihan — pilih yang cocok dengan level & waktumu.</p>
-      <a href={heroCta} class="mt-6 inline-flex min-h-[48px] items-center rounded-full bg-lime-700 px-7 text-sm font-black uppercase tracking-wide text-white transition hover:opacity-90">Survei Lokasi</a>
+<!-- Ref: athletic editorial index — daftar program ber-nomor dengan rule, kontras tinggi -->
+<BaseLayout
+  title="Program, Kelas & Personal Training My Fitness Jambi"
+  description="Rincian program My Fitness Jambi: open gym beban dan kardio, kelas grup, personal training, serta asesmen pemula. Survey dulu ke lokasi, tanpa komitmen."
+  canonicalPath="/program/"
+  crumb="Program"
+  image={business.ogImage}
+>
+  <section class="border-b border-paper/10" aria-labelledby="page-title">
+    <div class="mx-auto max-w-7xl px-4 py-14 md:py-20">
+      <nav class="text-[11px] font-semibold uppercase tracking-[0.2em] text-haze" aria-label="Breadcrumb">
+        <a href="/" class="transition-colors hover:text-accent">Beranda</a>
+        <span class="px-2 text-paper/30">/</span>
+        <span class="text-paper">Program</span>
+      </nav>
+      <h1 id="page-title" class="font-display mt-5 max-w-[20ch] text-4xl font-bold uppercase leading-[0.94] tracking-tight md:text-6xl">
+        Program &amp; kelas
+      </h1>
+      <p class="mt-5 max-w-[62ch] text-base leading-relaxed text-haze md:text-lg">
+        Empat jalur latihan yang tersedia di My Fitness kawasan The Hok. Karena jadwal resmi belum kami
+        terima, setiap program hanya menandai tingkat keyakinan datanya &mdash; bukan jam pasti.
+      </p>
+      <a href={maps} class="mt-8 inline-flex min-h-[48px] items-center gap-2 rounded-full bg-accent px-7 text-sm font-bold uppercase tracking-[0.1em] text-ink transition-transform hover:-translate-y-0.5 active:scale-[0.98]">
+        Rute ke lokasi
+        <Icon name="arrow" class="h-5 w-5" />
+      </a>
     </div>
   </section>
 
-  <section class="max-w-7xl mx-auto px-4 py-12 md:py-20" aria-label="Daftar program">
-    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {programs.map((p) => (
-        <article class="flex flex-col overflow-hidden rounded-3xl border border-stone-200 bg-white">
-          <img src={p.img} alt={p.alt} width="800" height="600" loading="lazy" decoding="async" class="aspect-[16/10] w-full object-cover" />
-          <div class="flex flex-1 flex-col p-6">
-            <p class="font-mono-num text-[11px] font-bold uppercase tracking-[0.18em] text-lime-700">{p.badge}</p>
-            <h2 class="mt-2 text-lg font-extrabold tracking-tight">{p.name}</h2>
-            <p class="mt-2 text-sm leading-relaxed text-stone-600">{p.desc}</p>
-            <a href={heroCta} class="mt-4 inline-flex min-h-[48px] items-center justify-center rounded-full border border-lime-700 px-5 text-sm font-bold uppercase tracking-wide text-lime-700 transition hover:bg-lime-700 hover:text-white">Coba Trial</a>
+  <section class="mx-auto max-w-7xl px-4 py-14 md:py-20" aria-label="Daftar program">
+    <ol class="divide-y divide-paper/10 border-y border-paper/10">
+      {programs.map((p, i) => (
+        <li class="grid grid-cols-1 gap-6 py-8 md:grid-cols-12 md:items-center md:gap-8">
+          <div class="md:col-span-1">
+            <span class="num font-display text-4xl font-bold leading-none text-accent md:text-5xl">{String(i + 1).padStart(2, '0')}</span>
           </div>
-        </article>
+          <div class="md:col-span-6">
+            <span class="inline-block rounded-full border border-paper/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-haze">{p.badge}</span>
+            <h2 class="font-display mt-3 text-3xl font-bold uppercase leading-none tracking-tight md:text-4xl">{p.name}</h2>
+            <p class="mt-3 max-w-[54ch] text-base leading-relaxed text-haze">{p.desc}</p>
+          </div>
+          <div class="md:col-span-5">
+            <div class="relative overflow-hidden rounded-2xl border border-paper/10">
+              <img src={p.img} alt={p.alt} width="800" height="600" loading="lazy" decoding="async" class="aspect-[16/10] w-full object-cover" />
+            </div>
+          </div>
+        </li>
       ))}
+    </ol>
+
+    <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-12">
+      <p class="text-xs leading-relaxed text-haze md:col-span-7">
+        Foto bersifat konteks, bukan dokumentasi resmi My Fitness Jambi. Label "Estimasi" menandakan informasi
+        yang perlu dikonfirmasi di lokasi sebelum dijadikan acuan.
+      </p>
+      <a href="/harga/" class="text-sm font-semibold text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent md:col-span-5 md:text-right">
+        Lihat estimasi harga keanggotaan
+      </a>
     </div>
-    <p class="mt-3 text-xs text-stone-400">Foto konteks — ganti foto asli lokasi.</p>
   </section>
-  <section class="max-w-7xl mx-auto px-4 pb-12 md:pb-20" aria-label="Ajakan">
-    <div class="rounded-3xl bg-stone-900 p-8 text-white md:p-10">
-      <p class="text-2xl font-black uppercase tracking-tight">Masih bingung pilih program?</p>
-      <p class="mt-2 text-sm text-white/70">Tanya gratis — admin bantu pilihkan sesuai level & tujuanmu.</p>
-      <a href={heroCta} class="mt-5 inline-flex min-h-[48px] items-center rounded-full bg-white px-8 text-sm font-black uppercase tracking-wide text-stone-900">Survei Lokasi</a>
+
+  <section class="border-t border-paper/10 bg-ink-2/25" aria-label="Ajakan kunjungan">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-14 md:flex-row md:items-center md:justify-between md:py-16">
+      <div>
+        <p class="font-display text-3xl font-bold uppercase leading-none tracking-tight md:text-4xl">Butuh bantuan memilih?</p>
+        <p class="mt-3 max-w-[52ch] text-sm leading-relaxed text-haze">
+          Tanyakan langsung di lokasi &mdash; petugas dapat menyesuaikan program dengan level dan tujuanmu.
+        </p>
+      </div>
+      <a href={maps} class="inline-flex w-max min-h-[48px] items-center gap-2 rounded-full bg-accent px-7 text-sm font-bold uppercase tracking-[0.1em] text-ink transition-transform hover:-translate-y-0.5 active:scale-[0.98]">
+        Buka Google Maps
+        <Icon name="arrow" class="h-5 w-5" />
+      </a>
     </div>
   </section>
 </BaseLayout>
