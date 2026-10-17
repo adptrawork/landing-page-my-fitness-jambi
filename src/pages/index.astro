@@ -24,7 +24,7 @@ const activity = [
   image={business.ogImage}
 >
   <!-- Ref: athletic split hero — teks kiri, foto area beban kanan; menghindari hero center -->
-  <section class="border-b border-paper/10" aria-labelledby="hero-title">
+  <section class="border-b border-paper/15" aria-labelledby="hero-title">
     <div class="mx-auto grid min-h-[100dvh] max-w-7xl grid-cols-1 md:grid-cols-2">
       <div class="flex flex-col justify-center px-4 py-20 md:px-8 md:py-24">
         <p class="rise inline-flex w-max items-center gap-2 rounded-full border border-paper/20 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-accent" style="--i:0">
@@ -47,7 +47,7 @@ const activity = [
             Lihat program
           </a>
         </div>
-        <dl class="rise mt-12 grid max-w-lg grid-cols-2 gap-x-6 gap-y-5 border-t border-paper/10 pt-6" style="--i:4">
+        <dl class="rise mt-12 grid max-w-lg grid-cols-2 gap-x-6 gap-y-5 border-t border-paper/15 pt-6" style="--i:4">
           <div>
             <dt class="text-[11px] font-semibold uppercase tracking-[0.2em] text-haze">Fokus</dt>
             <dd class="mt-1 font-display text-lg font-semibold uppercase tracking-wide">Beban &amp; kelas</dd>
@@ -60,6 +60,7 @@ const activity = [
       </div>
 
       <div class="relative min-h-[52vh] md:min-h-full">
+        <span class="stopwatch-overlay" aria-hidden="true">⏱</span>
         <img
           src="/images/my-fitness-1.webp"
           alt="Rak dumbel dan area latihan beban di My Fitness The Hok Jambi"
@@ -79,7 +80,7 @@ const activity = [
   </section>
 
   <!-- Ref: ticker fasilitas — marquee CSS transform, otomatis statis saat prefers-reduced-motion -->
-  <div class="ticker border-b border-paper/10 bg-ink-2/50 py-3">
+  <div class="ticker border-b border-paper/15 bg-ink-2/50 py-3">
     <div class="ticker-track" aria-hidden="true">
       {[0, 1].map(() => (
         <div class="flex shrink-0 items-center">
@@ -110,7 +111,7 @@ const activity = [
     </div>
 
     <div class="mt-10 grid grid-cols-1 gap-4 md:grid-cols-4 md:grid-rows-2">
-      <article class="rise col-span-1 flex flex-col justify-between rounded-2xl border border-paper/10 bg-ink-2/40 p-6 md:col-span-2 md:row-span-2 md:p-8" style="--i:0">
+      <article class="rise col-span-1 flex flex-col justify-between rounded-2xl border border-paper/15 bg-ink-2/40 p-6 md:col-span-2 md:row-span-2 md:p-8" style="--i:0">
         <div class="text-accent"><Icon name="gym" class="h-9 w-9" /></div>
         <div class="mt-8">
           <h3 class="font-display text-3xl font-bold uppercase leading-none tracking-tight md:text-4xl">Area beban &amp; kardio</h3>
@@ -121,7 +122,7 @@ const activity = [
         </div>
       </article>
 
-      <article class="rise col-span-1 rounded-2xl border border-paper/10 bg-ink-2/40 p-6 md:col-span-2" style="--i:1">
+      <article class="rise col-span-1 rounded-2xl border border-paper/15 bg-ink-2/40 p-6 md:col-span-2" style="--i:1">
         <div class="text-accent"><Icon name="users" class="h-8 w-8" /></div>
         <h3 class="font-display mt-4 text-2xl font-bold uppercase leading-none tracking-tight">Kelas grup</h3>
         <p class="mt-2 text-sm leading-relaxed text-haze">Latihan bersama instruktur. Jadwal resmi cek papan info lokasi.</p>
@@ -130,10 +131,10 @@ const activity = [
       <article class="rise rounded-2xl border border-accent bg-accent p-6 text-ink" style="--i:2">
         <Icon name="target" class="h-8 w-8" />
         <h3 class="font-display mt-4 text-2xl font-bold uppercase leading-none tracking-tight">Personal training</h3>
-        <p class="mt-2 text-sm font-medium leading-relaxed text-ink/80">Program 1-on-1 sesuai target. Tarif dan slot tanya di lokasi.</p>
+        <p class="mt-2 text-sm font-medium leading-relaxed text-ink/90">Program 1-on-1 sesuai target. Tarif dan slot tanya di lokasi.</p>
       </article>
 
-      <article class="rise rounded-2xl border border-paper/10 bg-ink-2/40 p-6" style="--i:3">
+      <article class="rise rounded-2xl border border-paper/15 bg-ink-2/40 p-6" style="--i:3">
         <div class="text-accent"><Icon name="clipboard" class="h-8 w-8" /></div>
         <h3 class="font-display mt-4 text-2xl font-bold uppercase leading-none tracking-tight">Asesmen pemula</h3>
         <p class="mt-2 text-sm leading-relaxed text-haze">Mulai dari nol dengan arahan singkat sebelum latihan.</p>
@@ -142,7 +143,7 @@ const activity = [
   </section>
 
   <!-- Ref: daftar aktivitas berkolom — list ber-rule divide-y, tabel jadi bertumpuk di mobile -->
-  <section class="border-y border-paper/10 bg-ink-2/25" aria-labelledby="aktivitas-title">
+  <section class="border-y border-paper/15 bg-ink-2/25" aria-labelledby="aktivitas-title">
     <div class="mx-auto max-w-7xl px-4 py-16 md:py-24">
       <div class="grid grid-cols-1 gap-4 md:grid-cols-12 md:items-end">
         <div class="md:col-span-8">
@@ -161,7 +162,7 @@ const activity = [
         <span class="col-span-3">Untuk siapa</span>
         <span class="col-span-4 text-right">Jadwal</span>
       </div>
-      <ul class="divide-y divide-paper/10 border-b border-paper/10">
+      <ul class="divide-y divide-paper/15 border-b border-paper/15">
         {activity.map((row, i) => (
           <li class="rise grid grid-cols-1 items-center gap-1 py-5 md:grid-cols-12 md:gap-4" style={`--i:${i}`}>
             <div class="flex items-center gap-3 md:col-span-5">
@@ -196,7 +197,7 @@ const activity = [
     <div class="mt-14 flex flex-col gap-16 md:gap-24">
       {programs.map((p, i) => (
         <article class="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-14">
-          <div class:list={['relative overflow-hidden rounded-2xl border border-paper/10', i % 2 === 1 ? 'md:order-2' : '']}>
+          <div class:list={['relative overflow-hidden rounded-2xl border border-paper/15', i % 2 === 1 ? 'md:order-2' : '']}>
             <img src={p.img} alt={p.alt} width="800" height="600" loading="lazy" decoding="async" class="aspect-[16/10] w-full object-cover" />
           </div>
           <div class:list={[i % 2 === 1 ? 'md:order-1' : '']}>
@@ -220,7 +221,7 @@ const activity = [
   </section>
 
   <!-- Ref: blok harga — tabel ber-rule yang berubah menjadi kartu di mobile -->
-  <section class="border-y border-paper/10 bg-ink-2/25" aria-labelledby="harga-title">
+  <section class="border-y border-paper/15 bg-ink-2/25" aria-labelledby="harga-title">
     <div class="mx-auto max-w-7xl px-4 py-16 md:py-24">
       <div class="grid grid-cols-1 gap-4 md:grid-cols-12 md:items-end">
         <div class="md:col-span-8">
@@ -243,7 +244,7 @@ const activity = [
             <th scope="col" class="py-3 font-semibold">Catatan</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-paper/10">
+        <tbody class="divide-y divide-paper/15">
           {prices.map((p) => (
             <tr>
               <th scope="row" class="py-5 pr-4 text-left align-top">
@@ -277,7 +278,7 @@ const activity = [
         <h2 id="lokasi-title" class="font-display mt-2 text-4xl font-bold uppercase leading-[0.95] tracking-tight md:text-5xl">
           Mampir dulu sebelum daftar
         </h2>
-        <dl class="mt-8 divide-y divide-paper/10 border-y border-paper/10">
+        <dl class="mt-8 divide-y divide-paper/15 border-y border-paper/15">
           <div class="py-4">
             <dt class="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-haze"><span class="text-accent"><Icon name="pin" class="h-5 w-5" /></span>Alamat</dt>
             <dd class="mt-1 text-base leading-relaxed">{business.address}</dd>

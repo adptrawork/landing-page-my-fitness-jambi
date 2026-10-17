@@ -2,7 +2,7 @@
 const { items = [] } = Astro.props as { items: { q: string; a: string }[] };
 ---
 <!-- Daftar pertanyaan ber-rule (tanpa kartu bertumpuk) -->
-<div class="divide-y divide-paper/10 border-y border-paper/10">
+<div class="divide-y divide-paper/15 border-y border-paper/15">
   {items.map((f) => (
     <details class="group py-4">
       <summary class="flex min-h-[48px] cursor-pointer list-none items-center justify-between gap-4 text-left font-display text-xl font-semibold uppercase tracking-wide [&::-webkit-details-marker]:hidden">

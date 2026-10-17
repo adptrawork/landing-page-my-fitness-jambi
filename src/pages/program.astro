@@ -12,7 +12,7 @@ const maps = business.mapsUrl;
   crumb="Program"
   image={business.ogImage}
 >
-  <section class="border-b border-paper/10" aria-labelledby="page-title">
+  <section class="border-b border-paper/15" aria-labelledby="page-title">
     <div class="mx-auto max-w-7xl px-4 py-14 md:py-20">
       <nav class="text-[11px] font-semibold uppercase tracking-[0.2em] text-haze" aria-label="Breadcrumb">
         <a href="/" class="transition-colors hover:text-accent">Beranda</a>
@@ -34,7 +34,7 @@ const maps = business.mapsUrl;
   </section>
 
   <section class="mx-auto max-w-7xl px-4 py-14 md:py-20" aria-label="Daftar program">
-    <ol class="divide-y divide-paper/10 border-y border-paper/10">
+    <ol class="divide-y divide-paper/15 border-y border-paper/15">
       {programs.map((p, i) => (
         <li class="grid grid-cols-1 gap-6 py-8 md:grid-cols-12 md:items-center md:gap-8">
           <div class="md:col-span-1">
@@ -46,7 +46,7 @@ const maps = business.mapsUrl;
             <p class="mt-3 max-w-[54ch] text-base leading-relaxed text-haze">{p.desc}</p>
           </div>
           <div class="md:col-span-5">
-            <div class="relative overflow-hidden rounded-2xl border border-paper/10">
+            <div class="relative overflow-hidden rounded-2xl border border-paper/15">
               <img src={p.img} alt={p.alt} width="800" height="600" loading="lazy" decoding="async" class="aspect-[16/10] w-full object-cover" />
             </div>
           </div>
@@ -65,7 +65,7 @@ const maps = business.mapsUrl;
     </div>
   </section>
 
-  <section class="border-t border-paper/10 bg-ink-2/25" aria-label="Ajakan kunjungan">
+  <section class="border-t border-paper/15 bg-ink-2/25" aria-label="Ajakan kunjungan">
     <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-14 md:flex-row md:items-center md:justify-between md:py-16">
       <div>
         <p class="font-display text-3xl font-bold uppercase leading-none tracking-tight md:text-4xl">Butuh bantuan memilih?</p>

@@ -33,9 +33,8 @@ const cta = business.mapsUrl;
 <body class="bg-ink text-paper antialiased">
   <a class="skip-link" href="#konten">Lewati ke konten utama</a>
 
-  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Buka atau tutup menu navigasi" />
-
-  <header class="sticky top-0 z-40 border-b border-paper/10 bg-ink/90 backdrop-blur-xl">
+  <header class="sticky top-0 z-40 border-b border-paper/15 bg-ink/95">
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Buka atau tutup menu navigasi" />
     <nav class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3" aria-label="Navigasi utama">
       <a href="/" class="flex min-h-[48px] items-center gap-3">
         <span class="grid h-10 w-10 place-items-center rounded-lg bg-accent font-display text-xl font-bold text-ink" aria-hidden="true">MF</span>
@@ -74,31 +73,31 @@ const cta = business.mapsUrl;
         ><span></span><span></span><span></span></label>
       </div>
     </nav>
-  </header>
 
-  <div id="mobile-menu" class="md:hidden">
-    <ul class="border-b border-paper/10 bg-ink-2/60 px-4 py-2 backdrop-blur-xl">
-      {nav.map((item) => (
-        <li>
-          <a
-            href={item.href}
-            aria-current={isActive(item.href) ? 'page' : undefined}
-            class:list={[
-              'flex min-h-[48px] items-center border-b border-paper/10 text-sm font-semibold uppercase tracking-[0.12em]',
-              isActive(item.href) ? 'text-accent' : 'text-paper',
-            ]}
-          >{item.label}</a>
+    <div id="mobile-menu" class="md:hidden">
+      <ul class="border-b border-paper/15 bg-ink-2/80 px-4 py-2">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+              class:list={[
+                'flex min-h-[48px] items-center border-b border-paper/15 text-sm font-semibold uppercase tracking-[0.12em]',
+                isActive(item.href) ? 'text-accent' : 'text-paper',
+              ]}
+            >{item.label}</a>
+          </li>
+        ))}
+        <li class="py-3">
+          <a href={cta} class="flex min-h-[48px] items-center justify-center rounded-full bg-accent px-5 text-sm font-bold uppercase tracking-[0.1em] text-ink active:scale-[0.98]">Rute lokasi</a>
         </li>
-      ))}
-      <li class="py-3">
-        <a href={cta} class="flex min-h-[48px] items-center justify-center rounded-full bg-accent px-5 text-sm font-bold uppercase tracking-[0.1em] text-ink active:scale-[0.98]">Rute lokasi</a>
-      </li>
-    </ul>
-  </div>
+      </ul>
+    </div>
+  </header>
 
   <main id="konten"><slot /></main>
 
-  <footer class="mt-24 border-t border-paper/10 bg-ink">
+  <footer class="mt-24 border-t border-paper/15 bg-ink">
     <div class="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-14 md:grid-cols-12">
       <div class="md:col-span-5">
         <p class="font-display text-2xl font-bold uppercase tracking-wide">My Fitness Jambi</p>
@@ -123,7 +122,7 @@ const cta = business.mapsUrl;
         </p>
       </div>
     </div>
-    <div class="border-t border-paper/10">
+    <div class="border-t border-paper/15">
       <p class="mx-auto max-w-7xl px-4 py-5 text-xs text-haze">
         &copy; 2026 My Fitness Jambi &mdash; Kota Jambi. Jam, harga, dan fasilitas bersifat estimasi; konfirmasi di lokasi.
       </p>

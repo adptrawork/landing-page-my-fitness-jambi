@@ -17,6 +17,7 @@
 html { scroll-behavior: smooth; }
 
 body {
+  overflow-x: hidden;
   background-color: var(--bg);
   color: var(--fg);
   font-family: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
@@ -54,14 +55,14 @@ body {
 .nav-toggle { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .burger span { display: block; width: 22px; height: 2px; background: currentColor; transition: transform 0.3s var(--ease-snap), opacity 0.2s; }
 .burger span + span { margin-top: 5px; }
-.nav-toggle:checked ~ header .burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav-toggle:checked ~ header .burger span:nth-child(2) { opacity: 0; }
-.nav-toggle:checked ~ header .burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-toggle:checked ~ nav .burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle:checked ~ nav .burger span:nth-child(2) { opacity: 0; }
+.nav-toggle:checked ~ nav .burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 #mobile-menu { display: none; }
 @media (max-width: 767px) {
   .nav-toggle:checked ~ #mobile-menu { display: block; }
 }
-.nav-toggle:focus-visible ~ header .burger { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
+.nav-toggle:focus-visible ~ nav .burger { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
 
 a, button, summary, label { -webkit-tap-highlight-color: transparent; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
@@ -81,12 +82,7 @@ a, button, summary, label { -webkit-tap-highlight-color: transparent; }
    * { transition-duration: 0.01ms !important; }
 }
 /* Stopwatch overlay on hero image */
-/* Stopwatch overlay on hero image */
-.relative.min-h-\\[52vh\\]\\.md\\:min-h-full {
-  position: relative;
-}
-.relative.min-h-\\[52vh\\]\\.md\\:min-h-full::before {
-  content: "⏱";
+.stopwatch-overlay {
   position: absolute;
   top: 1rem;
   left: 1rem;
@@ -108,4 +104,5 @@ a, button, summary, label { -webkit-tap-highlight-color: transparent; }
   opacity: 0.9;
   mix-blend-mode: screen;
   pointer-events: none;
+  z-index: 2;
 }
